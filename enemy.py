@@ -18,9 +18,16 @@ class Enemy(pg.sprite.Sprite):
     def update(self,data):
         dx = 0
         dy = 0
-        vel = random.randint(-1,1)
-        dx = dx + vel
-        dy = dy + vel
+        direction = random.randint(1,4)
+        if direction == 1:
+            dy -= 5
+        elif direction == 2:
+            dx += 5
+        elif direction == 3:
+            dy += 5
+        elif direction == 4:
+            dx -= 5
+
         #壁との接触判定
         for tile in data:
             if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):

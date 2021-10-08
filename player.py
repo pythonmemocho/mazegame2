@@ -22,13 +22,13 @@ class Player(pg.sprite.Sprite):
 		#プレイヤーのキー操作
         key = pg.key.get_pressed()
         if key[K_LEFT]:
-            dx -= 1
+            dx -= 5
         if key[K_RIGHT]:
-            dx += 1
+            dx += 5
         if key[K_UP]:
-            dy -= 1
+            dy -= 5
         if key[K_DOWN]:
-            dy += 1
+            dy += 5
 
         #壁との接触判定
         for tile in data:

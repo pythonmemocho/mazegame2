@@ -16,8 +16,10 @@ class Game():
         self.player = Player(25,25)
         
         self.playerSprite = pg.sprite.GroupSingle(self.player)
-        
+
         self.stage = Stage(stage_data)
+        
+        self.enemySprite = pg.sprite.GroupSingle(self.stage.enemy)
        
     #メインループメソッド
     def main(self):
@@ -36,11 +38,14 @@ class Game():
             self.stage.draw(SCREEN)
             #プレイヤーを描画
             self.playerSprite.draw(SCREEN)
-            self.stage.enemySprite.draw(SCREEN)
+            #敵を描画
+            self.enemySprite.draw(SCREEN)
             
+            pg.sprite.groupcollide(self.playerSprite, self.enemySprite, True, False)
+
             #プレイヤーのupdateメソッド呼び出し
             self.playerSprite.update(self.stage.tile_list)
-            self.stage.enemySprite.update(self.stage.tile_list)
+            self.enemySprite.update(self.stage.tile_list)
             
             #ゴール時の処理（テキスト描画）
             if self.player.goal:

@@ -22,7 +22,7 @@ class Stage():
 					self.tile_list.append(tile) 
 				if tile == 2:
 					self.enemy = Enemy(col_count * CHIP_SIZE,row_count * CHIP_SIZE) 
-					self.enemySprite = pg.sprite.GroupSingle(self.enemy)
+					
 					
 				col_count += 1
 			row_count += 1

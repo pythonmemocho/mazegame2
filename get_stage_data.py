@@ -41,15 +41,14 @@ if stage_data[goal][SIZE_W-2] == 1:
     stage_data[goal][SIZE_W-2] = 0
     stage_data[goal][SIZE_W-1] = 0
 
-ok = False
-while not ok:
+enemy_pos_set = False
+while not enemy_pos_set:
     enemy = random.randint(6,SIZE_H-2)
-    print(enemy)
     if stage_data[enemy][enemy] == 0:
         stage_data[enemy][enemy] = 2
-        ok = True
+        enemy_pos_set = True
         
 
 # ステージの並びを確認（これはなくても良い。確認用のコード）
-for stage in stage_data:
-    print(stage)
+# for stage in stage_data:
+#     print(stage)

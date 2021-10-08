@@ -4,7 +4,7 @@ WIDTH  =  475
 HEIGHT =  475
 
 CHIP_SIZE = 25
-PLAYER_SIZE = 25
+PLAYER_SIZE = 20
 CLOCK = pg.time.Clock()
 FPS = 60
 
