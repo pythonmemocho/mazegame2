@@ -13,14 +13,8 @@ class Game():
         pg.init()      
 
         #各クラスのインスタンス化
-        self.player = Player(25,25)
-        
-        self.playerSprite = pg.sprite.GroupSingle(self.player)
-
         self.stage = Stage(stage_data)
         
-        self.enemySprite = pg.sprite.GroupSingle(self.stage.enemy)
-       
     #メインループメソッド
     def main(self):
         running = True
@@ -37,18 +31,25 @@ class Game():
             #ステージを描画
             self.stage.draw(SCREEN)
             #プレイヤーを描画
-            self.playerSprite.draw(SCREEN)
+            self.stage.playerSprite.draw(SCREEN)
+            #ゴールを描画
+            self.stage.goalSprite.draw(SCREEN)
             #敵を描画
-            self.enemySprite.draw(SCREEN)
+            self.stage.enemySprite.draw(SCREEN)
             
-            pg.sprite.groupcollide(self.playerSprite, self.enemySprite, True, False)
+            #playerとenemyの衝突判定
+            pg.sprite.groupcollide(self.stage.playerSprite, self.stage.enemySprite, True, False)
 
-            #プレイヤーのupdateメソッド呼び出し
-            self.playerSprite.update(self.stage.tile_list)
-            self.enemySprite.update(self.stage.tile_list)
-            
+            #playerのupdateメソッド呼び出し
+            self.stage.playerSprite.update(self.stage.tile_list)
+            #enemyのupdateメソッド呼び出し
+            self.stage.enemySprite.update(self.stage.tile_list)
+            #playerとgoalの接触判定
+            if pg.sprite.collide_circle(self.stage.player,self.stage.goal):
+                self.stage.player.goal = True
+
             #ゴール時の処理（テキスト描画）
-            if self.player.goal:
+            if self.stage.player.goal:
                 draw_text('GOAL!', 100, WIDTH / 2, int(HEIGHT * 0.45), BLUE)
                 
             CLOCK.tick(FPS)

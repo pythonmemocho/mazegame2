@@ -32,22 +32,30 @@ for y in range(2, SIZE_H - 2, 2):
             d = random.randint(0, 2)
         stage_data[y + yp[d]][x + xp[d]] = 1
 
-#ゴールを作る。ゴールの１マス左が壁ならゴールにたどりつけなくなるので壁か通路かの判定を行う。
-goal = random.randint(1,SIZE_H-2)
+#GOALの位置をセット
+goal_pos_set = False
+while not goal_pos_set:
+    gx = random.randint(int(SIZE_W / 2),SIZE_W-2) #19/2=9,19-2=17
+    gy = random.randint(int(SIZE_H / 2),SIZE_H-2)
+    if stage_data[gy][gx] == 0:
+        stage_data[gy][gx] = "G"
+        goal_pos_set = True
 
-if stage_data[goal][SIZE_W-2] == 0:
-    stage_data[goal][SIZE_W-1] = 0
-if stage_data[goal][SIZE_W-2] == 1:
-    stage_data[goal][SIZE_W-2] = 0
-    stage_data[goal][SIZE_W-1] = 0
-
+#敵の初期位置をセット
 enemy_pos_set = False
+enemy_count = 0
 while not enemy_pos_set:
-    enemy = random.randint(6,SIZE_H-2)
-    if stage_data[enemy][enemy] == 0:
-        stage_data[enemy][enemy] = 2
-        enemy_pos_set = True
-        
+    ex = random.randint(int(SIZE_W / 2),SIZE_W-2) #19/2=9,19-2=17
+    ey = random.randint(int(SIZE_H / 2),SIZE_H-2)
+    if stage_data[ey][ex] == 0:
+        stage_data[ey][ex] = "E"
+        enemy_count += 1
+        if enemy_count == 1:
+            enemy_pos_set = True
+
+#プレイヤー開始位置セット
+if stage_data[1][1] == 0:
+    stage_data[1][1] = "P"
 
 # ステージの並びを確認（これはなくても良い。確認用のコード）
 # for stage in stage_data:

@@ -6,12 +6,15 @@ from setting import *
 class Player(pg.sprite.Sprite):
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((PLAYER_SIZE,PLAYER_SIZE))
-        self.image.fill(RED)
+        # self.image = pg.Surface((PLAYER_SIZE,PLAYER_SIZE))
+        self.image = pg.image.load('img/left-0.png')
+        self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
+        # self.image.fill(RED)
         self.rect = self.image.get_rect()
-        self.rect.topleft = [x,y]
+        self.rect.topleft = [x+2,y+2]
         self.width = self.image.get_width()
         self.height = self.image.get_height() 
+        self.radius = 10
         self.goal = False
                 
     def update(self,data):
@@ -42,6 +45,5 @@ class Player(pg.sprite.Sprite):
         self.rect.y += dy
 
         #ゴールした場合の処理
-        if self.rect.left > WIDTH:
+        if self.goal:
             self.kill()
-            self.goal = True
