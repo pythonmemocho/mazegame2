@@ -9,6 +9,7 @@ from objects import *
 class Stage():
 	def __init__(self, data):
 		self.enemySprite = pg.sprite.Group()
+		self.keySprite = pg.sprite.Group()
 		#空のリストを用意
 		self.tile_list = []
 		#のちに用意するstageの番号1を地面とし、リストに位置とサイズ情報を格納していく
@@ -32,6 +33,9 @@ class Stage():
 				if tile == "G":
 					self.goal = Goal(col_count * CHIP_SIZE,row_count * CHIP_SIZE)
 					self.goalSprite = pg.sprite.GroupSingle(self.goal)
+				if tile == "K":
+					self.key = Key(col_count * CHIP_SIZE,row_count * CHIP_SIZE)
+					self.keySprite.add(self.key)
 				col_count += 1
 			row_count += 1
         

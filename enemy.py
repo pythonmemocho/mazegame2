@@ -8,8 +8,8 @@ import random
 class Enemy(pg.sprite.Sprite):
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((PLAYER_SIZE,PLAYER_SIZE))
-        self.image.fill(BLUE)
+        self.image = pg.image.load('img/slime.png')
+        self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
         self.rect = self.image.get_rect()
         self.rect.topleft = [x+2,y+2]
         self.width = self.image.get_width()
@@ -24,7 +24,7 @@ class Enemy(pg.sprite.Sprite):
         dx = 0
         dy = 0
 
-        if self.counter % 60 == 0:
+        if self.counter % 80 == 0:
             self.direction = self.change_direction()
         
         if self.direction == 0:

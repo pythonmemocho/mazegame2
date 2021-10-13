@@ -36,9 +36,12 @@ class Game():
             self.stage.goalSprite.draw(SCREEN)
             #敵を描画
             self.stage.enemySprite.draw(SCREEN)
+            self.stage.keySprite.draw(SCREEN)
             
             #playerとenemyの衝突判定
             pg.sprite.groupcollide(self.stage.playerSprite, self.stage.enemySprite, True, False)
+            #playerとkeyの衝突判定
+            pg.sprite.groupcollide(self.stage.playerSprite, self.stage.keySprite, False, True)
 
             #playerのupdateメソッド呼び出し
             self.stage.playerSprite.update(self.stage.tile_list)
