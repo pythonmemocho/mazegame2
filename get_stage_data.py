@@ -34,9 +34,9 @@ for y in range(2, SIZE_H - 2, 2):
         stage_data[y + yp[d]][x + xp[d]] = 1
 
 
-def init_position_set(a,b,data,target):
+def init_position_set(a,b,c,d,data,target):
     x = random.randint(a,b)
-    y = random.randint(a,b)
+    y = random.randint(c,d)
     if data[y][x] == 0:
         data[y][x] = target
         return True
@@ -44,14 +44,14 @@ def init_position_set(a,b,data,target):
 #GOALの初期位置をセット
 goal_pos_set = False
 while not goal_pos_set:
-    if init_position_set(2,17,stage_data,'G'):
+    if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,'G'):
         goal_pos_set = True
 
 #keyの初期位置をセット
 key_pos_set = False
 key_count = 5
 while not key_pos_set:
-    if init_position_set(2,17,stage_data,"K"):
+    if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,"K"):
         key_count -= 1
     if key_count == 0:
         key_pos_set = True
@@ -60,7 +60,7 @@ while not key_pos_set:
 enemy_pos_set = False
 enemy_count = 5
 while not enemy_pos_set:
-    if init_position_set(4,17,stage_data,"E"):
+    if init_position_set(4,SIZE_W-1,4,SIZE_H-2,stage_data,"E"):
         enemy_count -= 1
     if enemy_count == 0:
         enemy_pos_set = True
@@ -70,5 +70,5 @@ if stage_data[1][1] == 0:
     stage_data[1][1] = "P"
 
 # ステージの並びを確認（これはなくても良い。確認用のコード）
-# for stage in stage_data:
-    # print(stage)
+# for  stage in stage_data:
+#    print(stage)

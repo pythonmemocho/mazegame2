@@ -6,17 +6,24 @@ from setting import *
 class Player(pg.sprite.Sprite):
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        # self.image = pg.Surface((PLAYER_SIZE,PLAYER_SIZE))
-        self.image = pg.image.load('img/left-0.png')
+        
+        self.image = self.get_sprite_image(PLAYER_SIZE,PLAYER_SIZE,"img/enemy.png",x,y)
+        # self.image = pg.image.load('img/left-0.png').convert_alpha()
         self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
-        # self.image.fill(RED)
         self.rect = self.image.get_rect()
-        self.rect.topleft = [x+2,y+2]
+        self.rect.topleft = [x,y]
         self.width = self.image.get_width()
         self.height = self.image.get_height() 
         self.radius = 10
         self.goal = False
-                
+        self.speed = 3
+
+    def get_sprite_image(self,width,height,sheet,x,y):
+        img = pg.Surface((width,height)).convert_alpha()
+        data = pg.image.load(sheet)
+        img.blit(data,(x,y))
+        return img
+
     def update(self,data):
         #プレイヤーの移動距離
         dx = 0
@@ -25,13 +32,13 @@ class Player(pg.sprite.Sprite):
 		#プレイヤーのキー操作
         key = pg.key.get_pressed()
         if key[K_LEFT]:
-            dx -= 5
+            dx -= self.speed
         if key[K_RIGHT]:
-            dx += 5
+            dx += self.speed
         if key[K_UP]:
-            dy -= 5
+            dy -= self.speed
         if key[K_DOWN]:
-            dy += 5
+            dy += self.speed
 
         #壁との接触判定
         for tile in data:

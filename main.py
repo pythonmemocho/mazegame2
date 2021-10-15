@@ -14,6 +14,8 @@ class Game():
 
         #各クラスのインスタンス化
         self.stage = Stage(stage_data)
+
+        self.key_count = 0
         
     #メインループメソッド
     def main(self):
@@ -30,26 +32,34 @@ class Game():
             SCREEN.fill(WHITE)
             #ステージを描画
             self.stage.draw(SCREEN)
-            #プレイヤーを描画
-            self.stage.playerSprite.draw(SCREEN)
             #ゴールを描画
             self.stage.goalSprite.draw(SCREEN)
             #敵を描画
             self.stage.enemySprite.draw(SCREEN)
+            #鍵を描画
             self.stage.keySprite.draw(SCREEN)
+            #プレイヤーを描画
+            self.stage.playerSprite.draw(SCREEN)
             
             #playerとenemyの衝突判定
             pg.sprite.groupcollide(self.stage.playerSprite, self.stage.enemySprite, True, False)
             #playerとkeyの衝突判定
-            pg.sprite.groupcollide(self.stage.playerSprite, self.stage.keySprite, False, True)
-
+            for key in self.stage.keySprite:
+                if pg.sprite.collide_circle(key,self.stage.player):
+                    print('KEY')
+                    key.kill()
+                    self.key_count += 1
+        
             #playerのupdateメソッド呼び出し
             self.stage.playerSprite.update(self.stage.tile_list)
             #enemyのupdateメソッド呼び出し
             self.stage.enemySprite.update(self.stage.tile_list)
+
             #playerとgoalの接触判定
             if pg.sprite.collide_circle(self.stage.player,self.stage.goal):
-                self.stage.player.goal = True
+                if self.key_count == 5:
+                    self.stage.player.goal = True
+            
 
             #ゴール時の処理（テキスト描画）
             if self.stage.player.goal:

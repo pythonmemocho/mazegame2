@@ -2,11 +2,12 @@ import pygame as pg
 
 # WIDTH  =  475
 # HEIGHT =  475 
-WIDTH  =  625
-HEIGHT =  625
+WIDTH  =  570
+HEIGHT =  570
 
-CHIP_SIZE = 25 
-PLAYER_SIZE = 20
+CHIP_SIZE = 30 
+PLAYER_SIZE = 25
+ENEMY_SIZE = 30
 CLOCK = pg.time.Clock()
 FPS = 60
 

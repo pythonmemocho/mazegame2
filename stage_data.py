@@ -22,6 +22,7 @@ class Stage():
 					self.playerSprite = pg.sprite.GroupSingle(self.player)
 				if tile == 1:
 					self.img = pg.image.load("img/aisle.png").convert_alpha()
+					self.img = pg.transform.scale(self.img,(CHIP_SIZE,CHIP_SIZE))
 					img_rect = self.img.get_rect()
 					img_rect.x = col_count * CHIP_SIZE
 					img_rect.y = row_count * CHIP_SIZE

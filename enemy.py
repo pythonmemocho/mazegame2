@@ -8,14 +8,16 @@ import random
 class Enemy(pg.sprite.Sprite):
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load('img/slime.png')
-        self.image = pg.transform.scale(self.image,(PLAYER_SIZE,PLAYER_SIZE))
+        self.image = pg.image.load('img/slime.png').convert_alpha()
+        self.image = pg.transform.scale(self.image,(ENEMY_SIZE,ENEMY_SIZE))
+        self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.topleft = [x+2,y+2]
+        self.rect.topleft = [x,y]
         self.width = self.image.get_width()
         self.height = self.image.get_height() 
         self.direction = self.change_direction()
         self.counter = 0
+        self.speed = 1
         
     def change_direction(self):
         return random.randint(0,4)
@@ -24,19 +26,19 @@ class Enemy(pg.sprite.Sprite):
         dx = 0
         dy = 0
 
-        if self.counter % 80 == 0:
+        if self.counter % 60 == 0:
             self.direction = self.change_direction()
         
         if self.direction == 0:
             dx,dy = 0,0
         elif self.direction == 1:
-            dy -= 5
+            dy -= self.speed
         elif self.direction == 2:
-            dx += 5
+            dx += self.speed
         elif self.direction == 3:
-            dy += 5
+            dy += self.speed
         elif self.direction == 4:
-            dx -= 5
+            dx -= self.speed
         
         #壁との接触判定
         for tile in data:
