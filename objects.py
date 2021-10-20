@@ -14,7 +14,10 @@ class Goal(pg.sprite.Sprite):
         self.width = self.image.get_width()
         self.height = self.image.get_height() 
         self.radius = 10
-        self.counter = 0
+    
+    def update(self):
+        self.image = pg.image.load(self.images[1])
+        self.image = pg.transform.scale(self.image,(CHIP_SIZE,CHIP_SIZE))
                 
             
 
@@ -28,3 +31,5 @@ class Key(pg.sprite.Sprite):
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         self.radius = 10
+        self.get_all_keys = False
+        

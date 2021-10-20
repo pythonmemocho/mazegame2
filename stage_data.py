@@ -6,7 +6,7 @@ from enemy import *
 from objects import *
 
 #ステージクラス       
-class Stage():
+class Stage:
 	def __init__(self, data):
 		self.enemySprite = pg.sprite.Group()
 		self.keySprite = pg.sprite.Group()
@@ -27,7 +27,7 @@ class Stage():
 					img_rect.x = col_count * CHIP_SIZE
 					img_rect.y = row_count * CHIP_SIZE
 					tile = (self.img, img_rect)
-					self.tile_list.append(tile) 
+					self.tile_list.append(tile)
 				if tile == "E":
 					self.enemy = Enemy(col_count * CHIP_SIZE,row_count * CHIP_SIZE)
 					self.enemySprite.add(self.enemy)

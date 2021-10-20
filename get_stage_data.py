@@ -47,6 +47,12 @@ while not goal_pos_set:
     if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,'G'):
         goal_pos_set = True
 
+#GOALの初期位置をセット
+star_pos_set = False
+while not star_pos_set:
+    if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,'S'):
+        star_pos_set = True
+
 #keyの初期位置をセット
 key_pos_set = False
 key_count = 5

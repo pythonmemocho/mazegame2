@@ -6,8 +6,6 @@ WIDTH  =  570
 HEIGHT =  570
 
 CHIP_SIZE = 30 
-PLAYER_SIZE = 25
-ENEMY_SIZE = 30
 CLOCK = pg.time.Clock()
 FPS = 60
 
@@ -19,6 +17,8 @@ WHITE = (255,255,255)
 RED = (255,0,0)
 BLUE = (0,0,255)
 YELLOW = (255,255,0)
+GRAY = (210,210,210)
+
 
 
 #テキスト描画用の関数
