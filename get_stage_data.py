@@ -47,17 +47,11 @@ while not goal_pos_set:
     if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,'G'):
         goal_pos_set = True
 
-#GOALの初期位置をセット
-star_pos_set = False
-while not star_pos_set:
-    if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,'S'):
-        star_pos_set = True
-
 #keyの初期位置をセット
 key_pos_set = False
-key_count = 5
+key_count = number_of_keys
 while not key_pos_set:
-    if init_position_set(2,SIZE_W-1,2,SIZE_H-2,stage_data,"K"):
+    if init_position_set(1,SIZE_W-1,2,SIZE_H-2,stage_data,"K"):
         key_count -= 1
     if key_count == 0:
         key_pos_set = True
@@ -75,6 +69,7 @@ while not enemy_pos_set:
 if stage_data[1][1] == 0:
     stage_data[1][1] = "P"
 
-# ステージの並びを確認（これはなくても良い。確認用のコード）
+# ステージの並びを確認（このコードは無くても良い。完成した配列の確認用のコードです）
+# どのような配列になっているか確認したい場合下の2行のコメントアウトを外して実行して下さい
 # for  stage in stage_data:
 #    print(stage)

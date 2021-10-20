@@ -8,7 +8,7 @@ from setting import *
 class Player(pg.sprite.Sprite):
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        self.images = self.get_sprite_image("img/player.png", 6, 16, 13, 13)
+        self.images = self.get_sprite_image("img/player.png", 6, 16, 13, 0)
         self.index = 0
         self.player_size = 25
         self.image = self.images[self.index]
@@ -18,10 +18,16 @@ class Player(pg.sprite.Sprite):
         self.width = self.image.get_width()
         self.height = self.image.get_height() 
         self.radius = self.width // 2
-        self.goal = False
-        self.speed = 2
-        self.index_counter = 20
+        #向きの設定
         self.direction = True
+        #移動速度の設定
+        self.speed = 2
+        #画像切り替え用のカウンター
+        self.index_counter = 20
+        #死亡しているかのチェック
+        self.dead = False
+        #ゴールしているのチェック
+        self.goal = False
 
     #sprite_sheetから画像を取り出すメソッド
     def get_sprite_image(self,sheet,count,width,height,y):
