@@ -17,7 +17,7 @@ pg.display.set_caption('Maze_Game')
 #使いそうな色の設定
 BLACK = (0,0,0)
 WHITE = (255,255,255)
-RED = (255,0,0)
+RED = (255,50,70)
 BLUE = (0,0,255)
 YELLOW = (255,255,0)
 GRAY = (210,210,210)

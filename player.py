@@ -24,9 +24,7 @@ class Player(pg.sprite.Sprite):
         self.speed = 2
         #画像切り替え用のカウンター
         self.index_counter = 20
-        #死亡しているかのチェック
-        self.dead = False
-        #ゴールしているのチェック
+        #ゴールしているかのチェック
         self.goal = False
 
     #sprite_sheetから画像を取り出すメソッド
