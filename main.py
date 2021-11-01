@@ -19,12 +19,10 @@ class Game():
         self.title = True
         self.game_over = False
 
-        #画面切り替え用のタイミング
+        #画面切り替えのタイミング
         self.init_count = 200
         self.timing_counter = self.init_count
 
-            
-    
     def main_set(self):
         #画面全体を灰色に塗る（通路の色）
         SCREEN.fill(GRAY)
@@ -37,35 +35,7 @@ class Game():
             if pg.sprite.collide_circle(enemy,self.stage.player):
                 self.stage.player.kill()
                 self.game_over = True
-
-        # playerとkeyの衝突判定        
-        for key in self.stage.keySprite:
-            if pg.sprite.collide_circle(key,self.stage.player):
-                key.kill()
-                self.get_keys += 1
-
-        #全てのカギを取得した時の処理
-        if self.get_keys == self.set_keys:
-            self.stage.key.get_all_keys = True
-
-        #doorの画像を切り替える
-        if self.stage.key.get_all_keys:
-            self.stage.goalSprite.update()
-
-        self.update()
-
-        #playerとgoalの接触判定
-        if pg.sprite.collide_circle(self.stage.player,self.stage.goal):
-            if self.get_keys == self.set_keys:
-                self.stage.player.goal = True
-                
-
-        #keyの数のテキスト
-        if not self.stage.key.get_all_keys:
-            draw_text(f'Keys: {self.get_keys}', 35, 55, 6, YELLOW)  
-        else:
-            draw_text(f'Door is open', 35, 80, 6, YELLOW)
-
+        
         #game_overの時のテキスト
         if self.game_over:
             draw_text(f'Failed..', 100, WIDTH / 2, int(HEIGHT * 0.45), RED)
@@ -74,6 +44,31 @@ class Game():
                 self.game_over = False
                 self.title = True
 
+        # playerとkeyの衝突判定        
+        for key in self.stage.keySprite:
+            if pg.sprite.collide_circle(key,self.stage.player):
+                key.kill()
+                self.get_keys += 1
+        
+        #keyの数のテキスト
+        if not self.stage.key.get_all_keys:
+            draw_text(f'Keys: {self.get_keys}', 35, 55, 6, YELLOW)  
+        else:
+            draw_text(f'Door is open', 35, 80, 6, YELLOW)
+        
+        #全てのカギを取得した時の処理
+        if self.get_keys == self.set_keys:
+            self.stage.key.get_all_keys = True
+
+        #doorの画像を切り替える
+        if self.stage.key.get_all_keys:
+            self.stage.goalSprite.update()
+        
+        #playerとgoalの接触判定
+        if pg.sprite.collide_circle(self.stage.player,self.stage.goal):
+            if self.get_keys == self.set_keys:
+                self.stage.player.goal = True
+        
         #ゴール時の処理（テキスト描画）
         if self.stage.player.goal:
             draw_text('GOAL!', 100, WIDTH / 2, int(HEIGHT * 0.45), WHITE)
@@ -81,6 +76,10 @@ class Game():
             if self.timing_counter < 0:
                 self.title = True
                 self.timing_counter = self.init_count
+
+        #まとめたupdateメソッドの呼び出し
+        self.update()
+
 
     #それぞれのclassのdrawメソッドをまとめて関数化しておく
     def draw(self):
