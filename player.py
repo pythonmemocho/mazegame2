@@ -1,13 +1,15 @@
 import pygame as pg
 from pygame.locals import *
 from setting import *
-#graphics from https://opengameart.org/users/grafxkid
 
+from _base_class import BaseClass
+#graphics from https://opengameart.org/users/grafxkid
 
 #プレイヤークラス
 class Player(pg.sprite.Sprite):
-    def __init__(self,x,y):
-        pg.sprite.Sprite.__init__(self)
+    def __init__(self,pos_x,pos_y):
+        pg.sprite.Sprite.__init__(self,pos_x,pos_y)
+        
         self.images = self.get_sprite_image("img/player.png", 6, 16, 13, 0)
         self.index = 0
         self.player_size = 25

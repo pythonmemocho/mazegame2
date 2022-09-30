@@ -1,6 +1,7 @@
 import pygame as pg
-from pygame.locals import *
-from setting import *
+# from pygame.locals import *
+# from setting import *
+
 import random
 
 
