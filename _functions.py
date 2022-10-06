@@ -20,3 +20,8 @@ def draw_text(text, size, x, y, color):
 		text_rect = text_surface.get_rect()
 		text_rect.midtop = (x, y)
 		_setting.SCREEN.blit(text_surface,text_rect)
+
+def image_load_and_scale_func(img, scale_x, scale_y):
+    img = pg.image.load(img).convert_alpha()
+    img = pg.transform.scale(img, (scale_x, scale_y))
+    return img

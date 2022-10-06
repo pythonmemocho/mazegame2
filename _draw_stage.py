@@ -1,12 +1,14 @@
 import pygame as pg
-from pygame.locals import *
 from player import Player 
 from _setting import *
 from enemy import Enemy
 from objects import Goal, Key
 
+from _functions import image_load_and_scale_func
+
 #ステージクラス       
 class Stage:
+	tile_img = image_load_and_scale_func('img/aisle.png',CHIP_SIZE,CHIP_SIZE)
 	def __init__(self, data):
 		self.enemySprite = pg.sprite.Group()
 		self.keySprite = pg.sprite.Group()
@@ -21,8 +23,7 @@ class Stage:
 					self.player = Player(col_count * CHIP_SIZE,row_count * CHIP_SIZE)
 					self.playerSprite = pg.sprite.GroupSingle(self.player)
 				if tile == 1:
-					self.img = pg.image.load("img/aisle.png").convert_alpha()
-					self.img = pg.transform.scale(self.img,(CHIP_SIZE,CHIP_SIZE))
+					self.img = self.tile_img
 					img_rect = self.img.get_rect()
 					img_rect.x = col_count * CHIP_SIZE
 					img_rect.y = row_count * CHIP_SIZE

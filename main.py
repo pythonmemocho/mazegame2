@@ -1,21 +1,24 @@
 import pygame as pg
 from pygame.locals import *  
-from create_stage import create_data, number_of_keys
+from _create_stage import create_data, number_of_keys
 from _draw_stage import *
 from spot_light import Spot_light
 from title_screen import *
 
-from _functions import draw_text
+from _functions import draw_text, image_load_and_scale_func
 
 #メインゲームクラス
-class Game():
+class Game:
+    key_img = image_load_and_scale_func('img/key.png',CHIP_SIZE,CHIP_SIZE)
+    door_open_img = image_load_and_scale_func('img/door_open.png',CHIP_SIZE,CHIP_SIZE)
+
     def __init__(self):
         pg.init()
            
         #Title/GameOver画面の表示切り替えフラグ
         self.title = True
         self.game_over = False
-
+        
         #画面切り替え用のタイミング
         self.init_count = 200
         self.timing_counter = self.init_count
@@ -56,15 +59,11 @@ class Game():
 
         #keyの数のテキスト
         if not self.stage.key.get_all_keys:
-            k = pg.image.load("img\key.png")
-            k = pg.transform.scale(k,(CHIP_SIZE,CHIP_SIZE))
             draw_text(f'{self.get_keys}', 35, 55, 6, (255, 215, 0))  
-            SCREEN.blit(k, (0,0))
+            SCREEN.blit(self.key_img, (0,0))
         else:
-            d = pg.image.load("img\door_open.png")
-            d = pg.transform.scale(d,(CHIP_SIZE,CHIP_SIZE))
             draw_text(f'OPEN', 35, 80, 6, (255, 215, 0))
-            SCREEN.blit(d, (0,0))
+            SCREEN.blit(self.door_open_img, (0,0))
             
         #game_overの時のテキスト
         if self.game_over:
@@ -103,7 +102,7 @@ class Game():
         self.stage.enemySprite.update(self.stage.tile_list)
         #spot_lightのupdateメソッド呼び出し
         if not self.game_over:
-            self.spot_light.update(self.stage.player.rect)
+            self.spot_light.draw(self.stage.player.rect)
 
     #メインループメソッド
     def main(self):

@@ -1,16 +1,17 @@
 import pygame as pg
-from pygame.locals import *
 from _setting import *
 
+from _functions import image_load_and_scale_func
 #graphics from https://opengameart.org/users/joe-williamson
 
-#goal(door)のクラス
 class Goal(pg.sprite.Sprite):
-    def __init__(self,x,y):
+    images = [
+        image_load_and_scale_func("img\door_close.png", CHIP_SIZE,CHIP_SIZE),
+        image_load_and_scale_func("img\door_open.png", CHIP_SIZE,CHIP_SIZE)
+        ]
+    def __init__(self, x, y):
         pg.sprite.Sprite.__init__(self)
-        self.images = ["img\door_close.png","img\door_open.png"]
-        self.image = pg.image.load(self.images[0])
-        self.image = pg.transform.scale(self.image,(CHIP_SIZE,CHIP_SIZE))
+        self.image = self.images[0]
         self.rect = self.image.get_rect()
         self.rect.topleft = [x,y]
         self.width = self.image.get_width()
@@ -18,16 +19,14 @@ class Goal(pg.sprite.Sprite):
         self.radius = 10
     
     def update(self):
-        self.image = pg.image.load(self.images[1])
-        self.image = pg.transform.scale(self.image,(CHIP_SIZE,CHIP_SIZE))
-                
-            
+        self.image = self.images[1]
+
 #keyのクラス
 class Key(pg.sprite.Sprite):
+    key_image = image_load_and_scale_func('img/key.png',CHIP_SIZE,CHIP_SIZE)
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load('img/key.png')
-        self.image = pg.transform.scale(self.image,(CHIP_SIZE,CHIP_SIZE))
+        self.image = self.key_image
         self.rect = self.image.get_rect()
         self.rect.topleft = [x,y]
         self.width = self.image.get_width()

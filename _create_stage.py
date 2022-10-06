@@ -1,4 +1,3 @@
-from pygame import init
 from _setting import *
 import random
 
@@ -7,9 +6,9 @@ SIZE_W = int(WIDTH / CHIP_SIZE)
 SIZE_H = int(HEIGHT / CHIP_SIZE)
 
 #keyの個数
-number_of_keys = 5
+number_of_keys = 1
 #敵の数
-number_of_enemies = 0
+number_of_enemies = 1
 
 def create_data():
     stage_data = []
