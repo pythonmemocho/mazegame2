@@ -1,6 +1,8 @@
 import pygame as pg
 from pygame.locals import *
-from setting import *
+from _setting import *
+
+from _functions import draw_text
 
 class Title:
     def __init__(self) -> None:

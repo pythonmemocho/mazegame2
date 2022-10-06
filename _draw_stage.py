@@ -1,9 +1,9 @@
 import pygame as pg
 from pygame.locals import *
 from player import Player 
-from setting import *
-from enemy import *
-from objects import *
+from _setting import *
+from enemy import Enemy
+from objects import Goal, Key
 
 #ステージクラス       
 class Stage:
@@ -39,8 +39,6 @@ class Stage:
 					self.keySprite.add(self.key)
 				col_count += 1
 			row_count += 1
-        
-		
 
 	#上で得たリスト情報を元にスクリーンに描画する	
 	def draw(self,screen):

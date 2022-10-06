@@ -1,6 +1,6 @@
 import pygame as pg
 from pygame.locals import *
-from setting import *
+from _setting import *
 
 #graphics from https://opengameart.org/users/joe-williamson
 

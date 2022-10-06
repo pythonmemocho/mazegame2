@@ -1,14 +1,13 @@
 import pygame as pg
-from pygame.locals import *
-from setting import *
 import random
 
+from _functions import get_sprite_image
 
 #Enemyクラス
 class Enemy(pg.sprite.Sprite):
     def __init__(self,x,y):
         pg.sprite.Sprite.__init__(self)
-        self.images = self.get_sprite_image("img/enemy.png", 6, 16, 16, 0)
+        self.images = get_sprite_image("img/enemy.png", 6, 16, 16, 0)
         self.enemy_size = 30
         self.index = 0
         self.image = self.images[self.index]
@@ -29,16 +28,6 @@ class Enemy(pg.sprite.Sprite):
         #画像の向き設定用の変数
         self.img_direction = True
 
-    #sprite_sheetから画像を取り出すメソッド
-    def get_sprite_image(self,sheet,count,width,height,y):
-        sprite_sheet = pg.image.load(sheet)
-        sheet_width = sprite_sheet.get_width()
-        image_size = int(sheet_width / count)
-        images = []
-        for i in range(count):
-            images.append(sprite_sheet.subsurface((image_size * i, y, width, height)))
-        return images    
-      
     #ランダムで進行方向を変える処理    
     def change_direction(self):
         return random.randint(1,4)

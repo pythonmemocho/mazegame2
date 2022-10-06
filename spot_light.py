@@ -1,7 +1,6 @@
 import pygame as pg
 from pygame.locals import *
-from setting import *
-from player import *
+from _setting import *
 
 class Spot_light():
     def __init__(self) -> None:
