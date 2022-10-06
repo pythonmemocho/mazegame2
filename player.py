@@ -1,16 +1,16 @@
 import pygame as pg
 from pygame.locals import *
-from setting import *
 
-from _base_class import BaseClass
+from _functions import get_sprite_image
+
 #graphics from https://opengameart.org/users/grafxkid
 
 #プレイヤークラス
 class Player(pg.sprite.Sprite):
-    def __init__(self,pos_x,pos_y):
-        pg.sprite.Sprite.__init__(self,pos_x,pos_y)
+    def __init__(self,x,y):
+        pg.sprite.Sprite.__init__(self)
         
-        self.images = self.get_sprite_image("img/player.png", 6, 16, 13, 0)
+        self.images = get_sprite_image("img/player.png", 6, 16, 13, 0)
         self.index = 0
         self.player_size = 25
         self.image = self.images[self.index]
@@ -28,16 +28,6 @@ class Player(pg.sprite.Sprite):
         self.index_counter = 20
         #ゴールしているかのチェック
         self.goal = False
-
-    #sprite_sheetから画像を取り出すメソッド
-    def get_sprite_image(self,sheet,count,width,height,y):
-        sprite_sheet = pg.image.load(sheet)
-        sheet_width = sprite_sheet.get_width()
-        image_size = int(sheet_width / count)
-        images = []
-        for i in range(count):
-            images.append(sprite_sheet.subsurface((image_size * i, y, width, height)))
-        return images
 
     #毎フレームの更新処理
     def update(self,data):
@@ -61,15 +51,15 @@ class Player(pg.sprite.Sprite):
 
 		#プレイヤーのキー操作
         key = pg.key.get_pressed()
-        if key[K_LEFT]:
+        if key[K_a]:
             self.direction = False
             dx -= self.speed
-        if key[K_RIGHT]:
+        if key[K_d]:
             self.direction = True
             dx += self.speed
-        if key[K_UP]:
+        if key[K_w]:
             dy -= self.speed
-        if key[K_DOWN]:
+        if key[K_s]:
             dy += self.speed
 
         #壁との接触判定

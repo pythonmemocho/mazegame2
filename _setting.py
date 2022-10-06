@@ -22,14 +22,3 @@ BLUE = (0,0,255)
 YELLOW = (255,255,0)
 GRAY = (210,210,210)
 ORANGE = (255,165,0)
-
-#keyの個数の設定
-number_of_keys = 5
-
-#テキスト描画用の関数
-def draw_text(text, size, x, y, color):
-		font = pg.font.Font(None, size)
-		text_surface = font.render(text, True, color)
-		text_rect = text_surface.get_rect()
-		text_rect.midtop = (x, y)
-		SCREEN.blit(text_surface,text_rect)

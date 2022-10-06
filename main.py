@@ -1,19 +1,16 @@
 import pygame as pg
 from pygame.locals import *  
-from setting import *
-from get_stage_data import *
-from player import *
-from stage_data import *
-from enemy import Enemy
+from create_stage import create_data, number_of_keys
+from _draw_stage import *
 from spot_light import Spot_light
 from title_screen import *
 
+from _functions import draw_text
 
 #メインゲームクラス
 class Game():
     def __init__(self):
         pg.init()
-
            
         #Title/GameOver画面の表示切り替えフラグ
         self.title = True
@@ -22,8 +19,6 @@ class Game():
         #画面切り替え用のタイミング
         self.init_count = 200
         self.timing_counter = self.init_count
-
-            
     
     def main_set(self):
         #画面全体を灰色に塗る（通路の色）
@@ -58,19 +53,24 @@ class Game():
         if pg.sprite.collide_circle(self.stage.player,self.stage.goal):
             if self.get_keys == self.set_keys:
                 self.stage.player.goal = True
-                
 
         #keyの数のテキスト
         if not self.stage.key.get_all_keys:
-            draw_text(f'Keys: {self.get_keys}', 35, 55, 6, YELLOW)  
+            k = pg.image.load("img\key.png")
+            k = pg.transform.scale(k,(CHIP_SIZE,CHIP_SIZE))
+            draw_text(f'{self.get_keys}', 35, 55, 6, (255, 215, 0))  
+            SCREEN.blit(k, (0,0))
         else:
-            draw_text(f'Door is open', 35, 80, 6, YELLOW)
-
+            d = pg.image.load("img\door_open.png")
+            d = pg.transform.scale(d,(CHIP_SIZE,CHIP_SIZE))
+            draw_text(f'OPEN', 35, 80, 6, (255, 215, 0))
+            SCREEN.blit(d, (0,0))
+            
         #game_overの時のテキスト
         if self.game_over:
             draw_text(f'Failed..', 100, WIDTH / 2, int(HEIGHT * 0.45), RED)
-            draw_text(f'press [t]key to return Title', 40, WIDTH / 2, int(HEIGHT * 0.60), RED)
-            if pg.key.get_pressed()[K_t]:
+            draw_text(f'press [ R ]key to return Title', 40, WIDTH / 2, int(HEIGHT * 0.60), WHITE)
+            if pg.key.get_pressed()[K_r]:
                 self.game_over = False
                 self.title = True
 
@@ -139,4 +139,6 @@ class Game():
         pg.quit()
 
 game = Game()
-game.main()
+
+if __name__ == '__main__':
+    game.main()

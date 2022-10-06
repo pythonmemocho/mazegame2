@@ -1,11 +1,15 @@
 from pygame import init
-from setting import *
+from _setting import *
 import random
 
 #ステージの設定
-
 SIZE_W = int(WIDTH / CHIP_SIZE)
 SIZE_H = int(HEIGHT / CHIP_SIZE)
+
+#keyの個数
+number_of_keys = 5
+#敵の数
+number_of_enemies = 0
 
 def create_data():
     stage_data = []
@@ -35,14 +39,6 @@ def create_data():
                 d = random.randint(0, 2)
             stage_data[y + yp[d]][x + xp[d]] = 1
 
-
-    def init_position_set(a,b,c,d,data,target):
-        x = random.randint(a,b)
-        y = random.randint(c,d)
-        if data[y][x] == 0:
-            data[y][x] = target
-            return True
-
     #GOALの初期位置をセット
     goal_pos_set = False
     while not goal_pos_set:
@@ -55,25 +51,31 @@ def create_data():
     while not key_pos_set:
         if init_position_set(1,SIZE_W-1,2,SIZE_H-2,stage_data,"K"):
             key_count -= 1
-        if key_count == 0:
+        if key_count <= 0:
             key_pos_set = True
 
     #敵の初期位置をセット
     enemy_pos_set = False
-    enemy_count = 5
+    enemy_count = number_of_enemies
     while not enemy_pos_set:
         if init_position_set(4,SIZE_W-1,4,SIZE_H-2,stage_data,"E"):
             enemy_count -= 1
-        if enemy_count == 0:
+        if enemy_count <= 0:
             enemy_pos_set = True
 
     #プレイヤー開始位置セット
     if stage_data[1][1] == 0:
         stage_data[1][1] = "P"
 
-    # ステージの並びを確認（このコードは無くても良い。完成した配列の確認用のコードです）
-    # どのような配列になっているか確認したい場合下の2行のコメントアウトを外して実行して下さい
+    #ステージの配列を確認したい場合にコメントアウトを外す
     # for  stage in stage_data:
     #    print(stage)
 
     return stage_data
+
+def init_position_set(a,b,c,d,data,target):
+        x = random.randint(a,b)
+        y = random.randint(c,d)
+        if data[y][x] == 0:
+            data[y][x] = target
+            return True
