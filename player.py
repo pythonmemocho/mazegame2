@@ -73,7 +73,7 @@ class Player(pg.sprite.Sprite):
         self.rect.x += dx
         self.rect.y += dy
                
-        #ゴールした場合の処理
-        if self.goal:
-            #killでグループから自身を削除
-            self.kill()
+        # #ゴールした場合の処理
+        # if self.goal:
+        #     #killでグループから自身を削除
+        #     self.kill()

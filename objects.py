@@ -20,6 +20,7 @@ class Goal(pg.sprite.Sprite):
     
     def update(self):
         self.image = self.images[1]
+        return self.image
 
 #keyのクラス
 class Key(pg.sprite.Sprite):
@@ -32,5 +33,4 @@ class Key(pg.sprite.Sprite):
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         self.radius = 10
-        self.get_all_keys = False
         
